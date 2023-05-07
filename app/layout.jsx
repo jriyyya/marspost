@@ -2,13 +2,14 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Roboto } from "next/font/google";
 import Nav from "./auth/Nav";
+import QueryWrapper from "./auth/QueryWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["300", "400", "700"],
-  variable: "--font-roboto"
-})
+  variable: "--font-roboto",
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -18,9 +19,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={` mx-4 md:mx-48 xl:mx-96 ${roboto.className} bg-gray-200`}>
-        <Nav />
-        {children}
+      <body
+        className={` mx-4 md:mx-48 xl:mx-96 ${roboto.className} bg-gray-200`}
+      >
+        <QueryWrapper>
+          <Nav />
+          {children}
+        </QueryWrapper>
       </body>
     </html>
   );
