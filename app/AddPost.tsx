@@ -9,14 +9,14 @@ export default function CreatePost() {
   const [isDisabled, setIsDisabled] = useState(false);
 
   //create a post
-  const { mutate } = useMutation(
-    async (title) => await axios.post("/api/posts/addPost", { title : ""})
-  );
+  const { mutate } = useMutation(async (title: string) => {
+    await axios.post("/api/posts/addPost", { title: title });
+  });
 
   const submitPost = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsDisabled(true);
-    mutate();
+    mutate(title);
   };
 
   return (
