@@ -1,12 +1,8 @@
 import prisma from '../../../prisma/client'
-import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "../auth/[...nextauth]";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req, res) {
   if (req.method === "POST") {
     const session = await getServerSession(req, res, authOptions)
     if (!session) {
@@ -15,7 +11,7 @@ export default async function handler(
         .json({ message: "Please signin to create a post." })
     }
 
-    const title: string = req.body.title
+    const title = req.body.title
 
     //Get User
     const prismaUser = await prisma.user.findUnique({

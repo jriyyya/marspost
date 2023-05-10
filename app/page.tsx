@@ -1,24 +1,24 @@
-"use client";
+"use client"
 
-import Post from "./Post";
-import AddPost from "./AddPost";
-import { useQuery } from "react-query";
-import axios from "axios";
-import { PostsType } from "./types/Posts";
+import Post from "./Post"
+import AddPost from "./AddPost"
+import { useQuery } from "react-query"
+import axios from "axios"
+import { PostsType } from "./types/Posts"
 
 //Fetch All posts
 const allPosts = async () => {
-  const response = await axios.get("/api/posts/getPosts");
-  return response.data;
-};
+  const response = await axios.get("/api/posts/getPosts")
+  return response.data
+}
 
 export default function Home() {
   const { data, error, isLoading } = useQuery<PostsType[]>({
     queryFn: allPosts,
     queryKey: ["posts"],
-  });
-  if (error) return error;
-  if (isLoading) return "Loading.....";
+  })
+  if (error) return <div>Error: {error.toString()}</div>
+  if (isLoading) return "Loading....."
 
   return (
     <div>
@@ -34,5 +34,5 @@ export default function Home() {
         />
       ))}
     </div>
-  );
+  )
 }
